@@ -1,50 +1,50 @@
 #Задание 1
-# list_type = (1, 2.0, complex(3, 4), '5', True, None)
-#
-# for el in list_type:
-#     print(f'type: {type(el)}')
+list_type = (1, 2.0, complex(3, 4), '5', True, None)
+
+for el in list_type:
+    print(f'type: {type(el)}')
 
 #Задание 2
-# usr_list = []
-# while True:
-#     usr_value = int(input("Введите значение. Для выход введите '-1': "))
-#
-#     if usr_value == -1:
-#         break
-#
-#     usr_list.append(usr_value)
-#
-# cnt = len(usr_list) if len(usr_list) % 2 == 0 else len(usr_list) - 1
-#
-# print(f'До изменений: {usr_list}')
-#
-# if cnt != 0:
-#     for i in range(0, cnt, 2):
-#         usr_list[i], usr_list[i + 1] = usr_list[i + 1], usr_list[i]
-#
-# print(f'После изменений: {usr_list}')
+usr_list = []
+while True:
+    usr_value = int(input("Введите значение. Для выход введите '-1': "))
+
+    if usr_value == -1:
+        break
+
+    usr_list.append(usr_value)
+
+cnt = len(usr_list) if len(usr_list) % 2 == 0 else len(usr_list) - 1
+
+print(f'До изменений: {usr_list}')
+
+if cnt != 0:
+    for i in range(0, cnt, 2):
+        usr_list[i], usr_list[i + 1] = usr_list[i + 1], usr_list[i]
+
+print(f'После изменений: {usr_list}')
 
 #Задание 3
-# list_month = ['Зима', 'Зима', 'Весна', 'Весна', 'Весна', 'Лето', 'Лето', 'Лето', 'Осень', 'Осень', 'Осень', 'Зима']
-# dict_month = {'1': 'Зима', '2': 'Зима', '3': 'Весна', '4': 'Весна', '5': 'Весна', '6': 'Лето',
-#               '7': 'Лето', '8': 'Лето', '9': 'Осень', '10': 'Осень', '11': 'Осень', '12': 'Зима'}
-#
-# indx_month = int(input('Введите месяц в числовом виде: '))
-#
-# if indx_month < 1 or indx_month > 12:
-#     print(f'Месяц {indx_month} не относится ни к какому времени года')
-# else:
-#     print(f'Время года из list: {list_month[indx_month - 1]}')
-#     print(f'Время года из dict: {dict_month.get(str(indx_month))}')
+list_month = ['Зима', 'Зима', 'Весна', 'Весна', 'Весна', 'Лето', 'Лето', 'Лето', 'Осень', 'Осень', 'Осень', 'Зима']
+dict_month = {'1': 'Зима', '2': 'Зима', '3': 'Весна', '4': 'Весна', '5': 'Весна', '6': 'Лето',
+              '7': 'Лето', '8': 'Лето', '9': 'Осень', '10': 'Осень', '11': 'Осень', '12': 'Зима'}
+
+indx_month = int(input('Введите месяц в числовом виде: '))
+
+if indx_month < 1 or indx_month > 12:
+    print(f'Месяц {indx_month} не относится ни к какому времени года')
+else:
+    print(f'Время года из list: {list_month[indx_month - 1]}')
+    print(f'Время года из dict: {dict_month.get(str(indx_month))}')
 
 #Задание 4
-# usr_str = input('Введите несколько строк через пробел: ')
-#
-# for el in usr_str.split(' '):
-#     if(len(el) > 10):
-#         print(f'{el[0:10]}...')
-#     else:
-#         print(el)
+usr_str = input('Введите несколько строк через пробел: ')
+
+for el in usr_str.split(' '):
+    if(len(el) > 10):
+        print(f'{el[0:10]}...')
+    else:
+        print(el)
 
 #Задание 5
 from random import randint
@@ -184,3 +184,60 @@ print(f'Список: {usr_list}')
 #(1.000.000) 2. 975360 3. 247196
 #(10.000.000) 2. 416370 3. 77110
 #(100.000.000) 2.975687 3. 775101
+
+#Задание 6
+inf = ("Название", "Цена", "Количество", "ед.")  # Массив вводимых данных
+indx_inf = 0; #Индекс данных
+
+l_goods = list()
+d_good = dict()
+
+txt = None
+
+cnt = 0
+while True:
+    txt = input(f'Введите параметр "{inf[indx_inf]}". Для выхода введите -1: ')
+    indx_inf += 1
+
+    if txt == "-1" and (indx_inf - 1) == 0:
+        break;
+    elif txt == "-1" and (indx_inf - 1) != 0:
+        print("Законичте ввод параметров по созданному продукту!")
+        indx_inf -= 1
+        continue
+
+    d_good[inf[indx_inf - 1]] = txt
+
+    if indx_inf == len(inf):
+        cnt += 1
+        l_goods.append((cnt, d_good.copy()))
+        d_good.clear()
+        indx_inf = 0
+
+print("Товары:")
+print("[")
+for l in l_goods:
+    print(f"    {l}")
+print("]")
+
+
+stat = dict()
+
+for lst in l_goods:
+    for k in lst[1]:
+        print(f"lst[1].get({k}) = {lst[1].get(k)}")
+        if stat.get(k) == None:
+            #stat[k] = list().append(lst[1].get(k))
+            #stat[k] = l.append(lst[1].get(k))
+            l = list()
+            l.append(lst[1].get(k))
+            stat[k] = l
+        else:
+            stat.get(k).append(lst[1].get(k))
+
+print(f"Аналитика:")
+print("{")
+for k in stat.keys():
+    print(f"    {k}: {set(stat.get(k))}")
+print("}")
+
